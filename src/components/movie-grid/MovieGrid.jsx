@@ -88,7 +88,7 @@ const MovieGrid = props => {
     )
 }
 
-const MovieSearch = props => {
+export const MovieSearch = props => {
 
     const navigate = useNavigate()
 

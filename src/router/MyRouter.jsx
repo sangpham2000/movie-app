@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import Catalog from '../pages/Catalog'
 import Detail from '../pages/detail/Detail'
 import Login from '../pages/login/Login'
+// import Register from '../pages/register/Register'
 
 
 const MyRoutes = () => {
@@ -16,6 +17,7 @@ const MyRoutes = () => {
             <Route path='/:category/:id' element={<Detail />}/>
             <Route path='/:category' element={<Catalog />}/>
             <Route path='/login' element={<Login />}/>
+            <Route path='/register' element={<Login />}/>
         </Routes>
     )
 }
