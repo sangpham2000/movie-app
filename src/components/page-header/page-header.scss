@@ -17,7 +17,7 @@
     }
 
     &::after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: 0;
         left: 0;
@@ -25,5 +25,4 @@
         height: 100px;
         background-image: linear-gradient(to top, $body-bg, rgba($black, 0));
     }
-
 }

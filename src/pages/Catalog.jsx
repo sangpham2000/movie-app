@@ -1,25 +1,22 @@
-import React from 'react'
+import React from 'react';
 
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 
-import PageHeader from '../components/page-header/PageHeader'
-import MovieGrid from '../components/movie-grid/MovieGrid'
+import PageHeader from '../components/page-header/PageHeader';
+import MovieGrid from '../components/movie-grid/MovieGrid';
 
-import Helmet from '../components/Helmet'
+import Helmet from '../components/Helmet';
 
-import { category as cate} from '../api/tmdbApi'
+import { category as cate } from '../api/tmdbApi';
 
 const Catalog = () => {
-
-    let { category } = useParams()
+    let { category } = useParams();
 
     return (
         <React.Fragment>
             <Helmet title={category === cate.movie ? 'Movies' : 'TV Series'}>
                 <PageHeader>
-                    {
-                        category === cate.movie ? 'Movies' : 'TV Series'
-                    }
+                    {category === cate.movie ? 'Movies' : 'TV Series'}
                 </PageHeader>
                 <div className="container">
                     <div className="section mb-3">
@@ -28,7 +25,7 @@ const Catalog = () => {
                 </div>
             </Helmet>
         </React.Fragment>
-    )
-}
+    );
+};
 
-export default Catalog
+export default Catalog;

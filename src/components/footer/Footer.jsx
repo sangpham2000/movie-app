@@ -1,15 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-import bg from '../../assets/footer-bg2.jpg'
-import logo from '../../assets/logo.png'
+import bg from '../../assets/footer-bg2.jpg';
+import logo from '../../assets/logo.png';
 
-import './footer.scss'
+import './footer.scss';
 
 const Footer = () => {
-
-
     return (
         <div className="footer" style={{ backgroundImage: `url(${bg})` }}>
             <div className="footer__content container">
@@ -40,7 +38,7 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;

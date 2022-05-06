@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import './input.scss'
+import './input.scss';
 
-const Input = props => {
+const Input = (props) => {
     return (
         <input
             type={props.type}
@@ -11,6 +11,6 @@ const Input = props => {
             onChange={props.onChange ? (e) => props.onChange(e) : null}
         />
     );
-}
+};
 
-export default Input
+export default Input;

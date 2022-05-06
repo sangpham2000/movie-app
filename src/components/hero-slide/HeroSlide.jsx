@@ -1,37 +1,36 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { Autoplay} from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import tmdbApi, { category, movieType } from '../../api/tmdbApi'
-import apiConfig from '../../api/apiConfig'
+import tmdbApi, { category, movieType } from '../../api/tmdbApi';
+import apiConfig from '../../api/apiConfig';
 
-import Button, { OutlineButton } from '../button/Button'
-import Modal, { ModalContent } from '../modal/Modal'
+import Button, { OutlineButton } from '../button/Button';
+import Modal, { ModalContent } from '../modal/Modal';
 
-import './hero-slide.scss'
-
-
+import './hero-slide.scss';
 
 const HeroSlide = () => {
-
     const [movieItems, setMovieItems] = useState([]);
 
     useEffect(() => {
         const getMovies = async () => {
-            const params = {page: 1}
+            const params = { page: 1 };
             try {
-                const response = await tmdbApi.getMoviesList(movieType.popular, {params});
+                const response = await tmdbApi.getMoviesList(
+                    movieType.popular,
+                    { params },
+                );
                 setMovieItems(response.results.slice(0, 6));
                 console.log(response);
             } catch {
                 console.log('error');
             }
-        }
+        };
         getMovies();
-    }, [])
-
+    }, []);
 
     return (
         <div className="hero-slide">
@@ -39,31 +38,34 @@ const HeroSlide = () => {
                 modules={[Autoplay]}
                 spaceBetween={0}
                 slidesPerView={1}
-                autoplay={{delay: 7000}}
+                autoplay={{ delay: 7000 }}
             >
-                {
-                    movieItems.map((item, index) => (
-                        <SwiperSlide key={index}>
-                            {({ isActive }) => (
-                                <HeroSlideItem item={item} className={`${isActive ? 'active' : ''}`}/>
-                            )}
-                        </SwiperSlide>
-                    ))
-                }
+                {movieItems.map((item, index) => (
+                    <SwiperSlide key={index}>
+                        {({ isActive }) => (
+                            <HeroSlideItem
+                                item={item}
+                                className={`${isActive ? 'active' : ''}`}
+                            />
+                        )}
+                    </SwiperSlide>
+                ))}
             </Swiper>
-            {
-                movieItems.map((item, index) => <TrailerModal key={index} item={item}/>)
-            }
+            {movieItems.map((item, index) => (
+                <TrailerModal key={index} item={item} />
+            ))}
         </div>
-    )
-}
+    );
+};
 
-const HeroSlideItem = props => {
+const HeroSlideItem = (props) => {
     const navigate = useNavigate();
 
     const item = props.item;
 
-    const background = apiConfig.originalImage(item.backdrop_path ? item.backdrop_path : item.poster_path);
+    const background = apiConfig.originalImage(
+        item.backdrop_path ? item.backdrop_path : item.poster_path,
+    );
 
     const setModalActive = async () => {
         const modal = document.querySelector(`#modal__${item.id}`);
@@ -71,27 +73,29 @@ const HeroSlideItem = props => {
         const videos = await tmdbApi.getVideos(category.movie, item.id);
 
         if (videos.results.length > 0) {
-            const videSrc = 'https://www.youtube.com/embed/' + videos.results[0].key;
-            modal.querySelector('.modal__content > iframe').setAttribute('src', videSrc);
+            const videSrc =
+                'https://www.youtube.com/embed/' + videos.results[0].key;
+            modal
+                .querySelector('.modal__content > iframe')
+                .setAttribute('src', videSrc);
         } else {
             modal.querySelector('.modal__content').innerHTML = 'No trailer';
         }
 
         modal.classList.toggle('active');
-    }
+    };
 
     return (
-        <div 
+        <div
             className={`hero-slide__item ${props.className}`}
-            style={{backgroundImage: `url(${background})`}}
+            style={{ backgroundImage: `url(${background})` }}
         >
             <div className="hero-slide__item__content container">
                 <div className="hero-slide__item__content__info">
                     <h2 className="title">{item.title}</h2>
                     <div className="overview">{item.overview}</div>
                     <div className="btns">
-                        <Button
-                         onClick={() => navigate('/movie/' + item.id)}>
+                        <Button onClick={() => navigate('/movie/' + item.id)}>
                             Watch now
                         </Button>
                         <OutlineButton onClick={setModalActive}>
@@ -104,26 +108,28 @@ const HeroSlideItem = props => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-const TrailerModal = props => {
+const TrailerModal = (props) => {
     const item = props.item;
 
     const iframeRef = useRef(null);
 
-    const onClose = () => iframeRef.current.setAttribute('src', '')
-    
+    const onClose = () => iframeRef.current.setAttribute('src', '');
+
     return (
         <Modal active={false} id={`modal__${item.id}`}>
             <ModalContent onClose={onClose}>
-                <iframe ref={iframeRef} width="100%" height="500px" title="trailer"></iframe>
+                <iframe
+                    ref={iframeRef}
+                    width="100%"
+                    height="500px"
+                    title="trailer"
+                ></iframe>
             </ModalContent>
         </Modal>
-    )
+    );
+};
 
-
-
-}
-
-export default HeroSlide
+export default HeroSlide;

@@ -1,14 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { OutlineButton } from '../components/button/Button'
+import { OutlineButton } from '../components/button/Button';
 
-import HeroSlide from '../components/hero-slide/HeroSlide'
+import HeroSlide from '../components/hero-slide/HeroSlide';
 import MovieList from '../components/movie-list/MovieList';
 
 import { category, movieType, tvType } from '../api/tmdbApi';
 
-import Helmet from '../components/Helmet'
+import Helmet from '../components/Helmet';
 
 const Home = () => {
     return (
@@ -20,45 +20,65 @@ const Home = () => {
                         <div className="section__header">
                             <h2>Trending Movies</h2>
                             <Link to="/movie">
-                                <OutlineButton className="small">View more</OutlineButton>
+                                <OutlineButton className="small">
+                                    View more
+                                </OutlineButton>
                             </Link>
                         </div>
-                        <MovieList category={category.movie} type={movieType.popular} />
+                        <MovieList
+                            category={category.movie}
+                            type={movieType.popular}
+                        />
                     </div>
 
                     <div className="section mb-3">
                         <div className="section__header">
                             <h2>Top Rated Movies</h2>
                             <Link to="/movie">
-                                <OutlineButton className="small">View more</OutlineButton>
+                                <OutlineButton className="small">
+                                    View more
+                                </OutlineButton>
                             </Link>
                         </div>
-                        <MovieList category={category.movie} type={movieType.top_rated} />
+                        <MovieList
+                            category={category.movie}
+                            type={movieType.top_rated}
+                        />
                     </div>
 
                     <div className="section mb-3">
                         <div className="section__header">
                             <h2>Trending TV</h2>
                             <Link to="/tv">
-                                <OutlineButton className="small">View more</OutlineButton>
+                                <OutlineButton className="small">
+                                    View more
+                                </OutlineButton>
                             </Link>
                         </div>
-                        <MovieList category={category.tv} type={tvType.popular} />
+                        <MovieList
+                            category={category.tv}
+                            type={tvType.popular}
+                        />
                     </div>
 
                     <div className="section mb-3">
                         <div className="section__header">
                             <h2>Top Rated</h2>
                             <Link to="/movie">
-                                <OutlineButton className="small">View more</OutlineButton>
+                                <OutlineButton className="small">
+                                    View more
+                                </OutlineButton>
                             </Link>
                         </div>
-                        <MovieList category={category.tv} type={tvType.top_rated} />
+                        <MovieList
+                            category={category.tv}
+                            type={tvType.top_rated}
+                        />
                     </div>
                 </div>
             </Helmet>
         </React.Fragment>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;
