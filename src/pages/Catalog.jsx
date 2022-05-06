@@ -14,10 +14,10 @@ const Catalog = () => {
 
     return (
         <React.Fragment>
+            <PageHeader>
+                {category === cate.movie ? 'Movies' : 'TV Series'}
+            </PageHeader>
             <Helmet title={category === cate.movie ? 'Movies' : 'TV Series'}>
-                <PageHeader>
-                    {category === cate.movie ? 'Movies' : 'TV Series'}
-                </PageHeader>
                 <div className="container">
                     <div className="section mb-3">
                         <MovieGrid category={category} />
